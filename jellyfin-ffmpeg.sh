@@ -1,11 +1,11 @@
 #!/bin/bash
 
-if [ `ls -1 jellyfin-ffmpeg_*-bullseye_amd64.deb | wc -l` -ne 1 ]; then
-    echo "jellyfin-ffmpeg_XYZ-bullseye_amd64.deb not found or several releases."
+if [ `ls -1 jellyfin-ffmpeg*_*-bullseye_amd64.deb | wc -l` -ne 1 ]; then
+    echo "jellyfin-ffmpeg*_XYZ-bullseye_amd64.deb not found or several releases."
     exit
 fi
 
-FFMPEG=`ls -1 jellyfin-ffmpeg_*-bullseye_amd64.deb`
+FFMPEG=`ls -1 jellyfin-ffmpeg*_*-bullseye_amd64.deb`
 echo $FFMPEG found.
 
 getDependencies () {
@@ -45,7 +45,6 @@ if [ ! -z \${LIBVA_FROM_CONFIG} ]; then
         export LIBVA_DRIVER_NAME="\$LIBVA_FROM_CONFIG"
     fi
 fi
-echo "LIBVA_DRIVER_NAME_JELLYFIN=\$LIBVA_DRIVER_NAME_JELLYFIN"
 \$QPKG_ROOT/jellyfin-ffmpeg/lib/ld-linux-x86-64.so.2 --library-path \$QPKG_ROOT/jellyfin-ffmpeg/lib \$QPKG_ROOT/jellyfin-ffmpeg/ffmpeg2 "\$@"
 EOL
 
@@ -64,7 +63,6 @@ if [ ! -z \${LIBVA_FROM_CONFIG} ]; then
         export LIBVA_DRIVER_NAME="\$LIBVA_FROM_CONFIG"
     fi
 fi
-echo "LIBVA_DRIVER_NAME_JELLYFIN=\$LIBVA_DRIVER_NAME_JELLYFIN"
 \$QPKG_ROOT/jellyfin-ffmpeg/lib/ld-linux-x86-64.so.2 --library-path \$QPKG_ROOT/jellyfin-ffmpeg/lib \$QPKG_ROOT/jellyfin-ffmpeg/ffprobe2 "\$@"
 EOL
 
